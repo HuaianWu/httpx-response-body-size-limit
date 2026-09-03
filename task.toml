@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = ["/logs/artifacts/model.patch"]
+[task]
+name = "benzhi/httpx-response-body-size-limit"
+description = ""
+authors = []
+keywords = []
+[metadata]
+ext_id = "kh180ac287912b4f111e64a1470091f0"
+task_id = "httpx-response-body-size-limit"
+display_title = "Add configurable response body size limits"
+display_description = "Bound HTTPX response bodies consistently for streamed, buffered, compressed, synchronous, and asynchronous requests."
+original_title = "为 HTTPX 增加可配置的响应体大小上限"
+category = "feature_request"
+language = "python"
+repository_url = "https://github.com/encode/httpx"
+base_commit_hash = "26d48e0634e6ee9cdc0533996db289ce4b430177"
+[verifier]
+network_mode = "no-network"
+environment_mode = "separate"
+timeout_sec = 1800.0
+
+[verifier.env]
+[verifier.environment]
+build_timeout_sec = 1800.0
+cpus = 2
+memory_mb = 8192
+storage_mb = 20480
+
+[[verifier.collect]]
+command = "cd /app && mkdir -p /logs/artifacts && git config --global --add safe.directory /app && git diff --binary 26d48e0634e6ee9cdc0533996db289ce4b430177 HEAD > /logs/artifacts/model.patch"
+timeout_sec = 300.0
+
+[agent]
+network_mode = "no-network"
+timeout_sec = 10800.0
+[environment]
+build_timeout_sec = 1800.0
+# docker_image is omitted in step 1: Harbor/Pier builds environment/Dockerfile.
+# After the image is built and pushed, set e.g.
+# docker_image = "<registry>/benzhi-swe:kh180ac287912b4f111e64a1470091f0-v1"
+os = "linux"
+cpus = 2
+memory_mb = 8192
+storage_mb = 20480
+gpus = 0
+mcp_servers = []
+
+[environment.env]
+[solution.env]
