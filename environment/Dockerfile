@@ -17,7 +17,7 @@ RUN git clone https://github.com/encode/httpx . \
 RUN pip install --no-cache-dir \
     -r requirements.txt \
     && pip install --no-cache-dir -e . \
-    && pip install --no-cache-dir pytest \
+    && pip install --no-cache-dir "pytest==9.1.1" \
     && test -z "$(git status --porcelain)"
 
 # Disable git commit hooks (pre-commit, husky etc.): dev-workflow tooling, not task content.
